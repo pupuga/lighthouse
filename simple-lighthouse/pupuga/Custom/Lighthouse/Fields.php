@@ -75,7 +75,6 @@ final class Fields
             $countItems = count($items) + 1;
             foreach ($items as $key => $score) {
                 $countItems--;
-                $link = Site::app()->getLink($key);
                 $classStyle = 'black';
                 $classAlertStyle = '';
                 $minScore = intval(get_post_meta($id, '_min_score', true));
@@ -83,8 +82,11 @@ final class Fields
                     $score = intval($score);
                     $parts = explode(' ', $key);
                     $date = (new \DateTime($parts[0]))->format('d.m.Y') . ' ' . $parts[1];
+                    $link = Site::app()->getLink($key);
                     $link = "<a href='{$link}' target='_blank'>{$date}</a>";
                     $classAlertStyle = $minScore > $score ? 'background-alert' : $classAlertStyle;
+                } else {
+                    $link = "<span>{$date}</span>";
                 }
                 $circle = Files::getTemplate(__DIR__ . '/templates/circle',
                     array(
@@ -106,6 +108,7 @@ final class Fields
                 array(
                     'html' => $html
                 ),false);
+
         }
 
         return "<div>{$html}</div>";

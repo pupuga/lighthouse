@@ -34,8 +34,8 @@ final class CalculateScores
             }
         }
         $message = SendingMessage::app()->get();
-        file_put_contents(__DIR__ . '/1.html',  $message);
-        //$this->send($message);
+        //file_put_contents(__DIR__ . '/1.html',  $message);
+        $this->send($message);
     }
 
     private function Send($message): void
